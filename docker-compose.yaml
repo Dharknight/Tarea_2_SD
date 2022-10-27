@@ -1,0 +1,135 @@
+version: '3.1'
+
+networks:
+  lared:
+    driver: bridge
+
+services:
+  members_producer:
+    container_name: members_producer
+    build: ./server/Members/producer
+    depends_on:
+       - zookeeper
+       - kafka 
+
+    networks:
+       - lared
+    ports:
+      - "3000:3000"
+        
+  members_consumer:
+    container_name: members_consumer
+    build: ./server/Members/consumer
+    networks:
+      - lared
+    depends_on:
+       - zookeeper
+       - kafka 
+
+    # volumes:
+    #   - ./server/error:/usr/src/app
+
+    ports:
+      - "8000:8000"
+
+  sale_producer:
+    container_name: sale_producer
+    build: ./server/Ventas/producer
+    networks:
+      - lared
+    depends_on:
+       - zookeeper
+       - kafka 
+
+    # volumes:
+    #   - ./server/error:/usr/src/app
+
+    ports:
+      - "3001:3000"
+
+  sales_consumer:
+    container_name: sales_consumer
+    build: ./server/Ventas/consumer
+    networks:
+      - lared
+    depends_on:
+       - zookeeper
+       - kafka 
+
+    # volumes:
+    #   - ./server/error:/usr/src/app
+
+    ports:
+      - "8001:8000"
+
+  stock_consumer:
+    container_name: stock_consumer
+    build: ./server/Stock/consumer
+    networks:
+      - lared
+    depends_on:
+       - zookeeper
+       - kafka 
+    environment: 
+      - kafka
+    # volumes:
+    #   - ./server/error:/usr/src/app
+
+    ports:
+      - "8002:8000"
+
+  ubication_producer:
+    container_name: ubication_producer
+    build: ./server/Ubication/producer
+    networks:
+      - lared
+    depends_on:
+       - zookeeper
+       - kafka 
+
+    # volumes:
+    #   - ./server/error:/usr/src/app
+
+    ports:
+      - "3003:3000"
+
+  ubication_consumer:
+    container_name: ubication_consumer
+    build: ./server/Ubication/consumer
+    networks:
+      - lared
+    depends_on:
+       - zookeeper
+       - kafka 
+    ports:
+      - "8003:8000"
+
+  zookeeper:
+    container_name: elzookeeper
+    image: 'bitnami/zookeeper:latest'
+    environment:
+      ALLOW_ANONYMOUS_LOGIN: "yes"
+    networks:
+      - lared
+    ports:
+      - 2181:2181
+      - 2888:2888
+      - 3888:3888
+    
+  kafka:
+    container_name: elkafka
+    image: 'bitnami/kafka:latest'
+    networks:
+     - lared
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: "kafka"   
+      KAFKA_ADVERTISED_PORT: "9092"
+      ALLOW_PLAINTEXT_LISTENER: "yes"
+      KAFKA_CFG_ZOOKEEPER_CONNECT: "zookeeper:2181"
+
+    ports:
+      - 9092:9092
+
+
