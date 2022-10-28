@@ -57,9 +57,12 @@ var value = null
 var json = {}
 var algo = {};
 var stock = [];
-var ventas_total_carro = new Array()
-var clientes_total_carro = new Array()
-var clientes_numero_carro = []
+var ventas_total_por_patente = []
+var patentes = []
+var clientes = []
+var cliente_y_patente = []
+var clientes_total_por_patente = []
+var promedio_ventas_a_cliente = []
 
 const main = async () => {
   console.log("Entra sale")
@@ -76,20 +79,68 @@ const main = async () => {
       })  
       json = JSON.parse(value)
 
-      const patente = json["patente_carro"]
-      const client = json["client"]
-      const count = json.count_sopaipillas
+      //VENTAS TOTALES DE SOPAIPILLAS POR CARRITO
+      if(ventas_total_por_patente.length == 0){
+        var info = {
+          patente:json.patente_carro,
+          count_sopaipillas:json.count_sopaipillas
+        }
+        ventas_total_por_patente.push(info)
+      }
+      for(var i in ventas_total_por_patente){
+        var info2 = {
+          patente:json.patente_carro,
+          count_sopaipillas:json.count_sopaipillas
+        }
+        if(ventas_total_por_patente[i].patente == json.patente_carro){
+          ventas_total_por_patente[i].count_sopaipillas = ventas_total_por_patente[i].count_sopaipillas + json.count_sopaipillas
+        }else{
+          ventas_total_por_patente.push(info2)
+        }
+      }
 
-      if(ventas_total_carro.includes(json.patente_carro)){
-        ventas_total_carro[patente] = ventas_total_carro[patente] + 1
+      //PROMEDIO DE VENTAS DE CADA CARRITO POR CLIENTE
+      if(clientes.length == 0){
+        var info3 = {
+          patente:json.patente_carro,
+          client:json.client,
+          count_sopaipillas:json.count_sopaipillas
+        }
+        promedio_ventas_a_cliente.push(info3)
+      }
+      for(var j in promedio_ventas_a_cliente){
+        if(promedio_ventas_a_cliente[i].patente == info3.patente && promedio_ventas_a_cliente[i].client == info3.client){
 
-      }else if(!clientes_total_carro.includes(json.client)){
-        clientes_total_carro.push(patente)
-        clientes_total_carro[patente] = clientes_total_carro[patente] + 1
+        }else if(promedio_ventas_a_cliente[i].patente == info3.patente && promedio_ventas_a_cliente[i].client != info3.client){
 
-      }else if(!ventas_total_carro.includes(json.patente_carro)){
-        ventas_total_carro.push(patente)
-        ventas_total_carro[patente] = 1
+        }else if(promedio_ventas_a_cliente[i].patente != info3.patente && promedio_ventas_a_cliente[i].client == info3.client){
+
+        }
+      }
+
+      //CLIENTES TOTALES POR CARRITO
+
+      if(clientes_total_por_patente.length == 0){
+        var info4 = {
+          patente:json.patente_carro,
+          count_client: 1
+        }
+        clientes.push(json.client)
+        clientes_total_por_patente.push(info4)
+      }
+      for(var k in clientes_total_por_patente){
+        var info5 = {
+          patente: json.patente_carro,
+          client: json.client
+        }
+        if(clientes_total_por_patente[k].patente == json.patente_carro){
+          if(cliente_y_patente[k].client != json.client){
+              clientes_total_por_patente[k].count_client++
+          }
+        }else{
+          clientes_total_por_patente.push(info4)
+          cliente_y_patente.push(info5)
+        }
       }
       
       /*else if(clientes_total_carro[json["patente_carro"]].includes(json["client"])){
@@ -97,8 +148,8 @@ const main = async () => {
         
       }*/
 
-      console.log(`Ventas totales: ${ventas_total_carro[patente]}`)
-      console.log(`Clientes totales: ${clientes_total_carro[patente]}`)
+      //console.log(`Clientes totales: ${clientes_total_carro[patente]}`)
+      //console.log(`Ventas totales: ${ventas_total_carro[patente]}`)
 
     },
   })
@@ -107,10 +158,14 @@ const main = async () => {
 
 //asdlaskdj
 app.get('/ventadiaria', (req, res) => {
-  console.log(`Ventas totales: ${ventas_total_carro}`)
-  console.log(`Clientes totales: ${clientes_total_carro}`)
-  res.send(ventas_total_carro)
-  res.send(clientes_total_carro)
+  console.log('Ventas totales por cada carrito')
+  console.log(ventas_total_por_patente)
+  console.log('Clientes totales por cada carrito')
+  console.log(clientes_total_por_patente)
+  //console.log(`Promedio de ventas a clientes: ${lasalkslas}`)
+  //res.send(ventas_total_por_patente)
+  //res.send(clientes_total_por_patente)
+  //res.send(snajskajs)
 })
 /* PORTS */
 

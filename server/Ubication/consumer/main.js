@@ -56,18 +56,19 @@ const main = async () => {
         for(var i in carritos_patente_noprofugos){
           if(carritos_patente_noprofugos[i].patente == info.patente){
             if((info.time - carritos_patente_noprofugos[i].time) > 60){
-              console.log(`Carrito con patente ${carritos_patente_noprofugos[i].patente} desapareció`)
+              console.log(`Carrito con patente ${carritos_patente_noprofugos[i].patente} desaparecio`)
               carritos_patente_noprofugos.splice(i,1)
             }else{
               carritos_patente_noprofugos[i].ubicacion = info.ubicacion
-              console.log(`Carrito con patente ${carritos_patente_noprofugos[i].patente} está en la ubicacion ${carritos_patente_noprofugos[i].ubicacion}`)
+              console.log(`Carrito con patente ${carritos_patente_noprofugos[i].patente} esta en la ubicacion ${carritos_patente_noprofugos[i].ubicacion}`)
               carritos_patente_noprofugos[i].time = info.time 
             }
           }else{
             carritos_patente_noprofugos.push(info)
-            console.log(`Carrito con patente ${carritos_patente_noprofugos[i].patente} está en la ubicacion ${carritos_patente_noprofugos[i].ubicacion}`)
+            console.log(`Carrito con patente ${carritos_patente_noprofugos[i].patente} esta en la ubicacion ${carritos_patente_noprofugos[i].ubicacion}`)
           }
         }
+        console.log('Carros profugos')
         console.log(carritos_patente_noprofugos)
       }
       else if(partition == 1)
@@ -87,7 +88,7 @@ const main = async () => {
               console.log(carritos_patente_profugos)
             }else{
               carritos_patente_profugos.push(info2)
-              console.log('Carritos prófugos')
+              console.log('Carritos profugos')
               console.log(carritos_patente_profugos)
               break;
             }
