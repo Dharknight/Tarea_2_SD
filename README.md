@@ -47,12 +47,13 @@ http://localhost:3001/sales
 	"patente_carro": "CGZY30"
 }
 
-Topic: Stock
+Topic: Ubicacion
+http://localhost:3003/ubication
 
-
-
-Topic: Coordenadas
-
+{
+  "patente":"CGZY30",
+  "ubicacion": "1,1"
+}
 
 Topic: Miembros
 http://localhost:3000/new_member

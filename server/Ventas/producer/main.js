@@ -36,19 +36,24 @@ app.post("/sales", (req, res) => {
       //const admin = kafka.admin();
       await producer.connect();
       const { client, count_sopaipillas, hora, stock, ubicacion, patente_carro } = req.body;
-      //var time = Math.floor(new Date() / 1000);
+      var time = Math.floor(new Date() / 1000);
       let sale = {
         client: client,
         count_sopaipillas: count_sopaipillas,
         hora: hora,
         stock: stock,
         ubicacion: ubicacion,
-        patente_carro:patente_carro
+        patente_carro:patente_carro,
+        time:time
       }
+      
+      console.log("Este carrito ha sido denunciado, es profugo")
+
       const topicMessages = [
         {
-            topic: 'coordenadas',
-            messages: [{key: 'key1', value: JSON.stringify(sale), partition: 1}]
+          topic: 'ubication',
+          partition:0,
+          messages:[{value:JSON.stringify(sale),partition: 0}]
         },
         {
           // Stock debe estar leyendo constantes consultas
@@ -56,13 +61,14 @@ app.post("/sales", (req, res) => {
           messages: [{value: JSON.stringify(sale)}]
         },
         {
-            // Stock debe estar leyendo constantes consultas
-            topic: 'stock',
-            messages: [{value: JSON.stringify(sale)}]
+          // Stock debe estar leyendo constantes consultas
+          topic: 'stock',
+          messages: [{value: JSON.stringify(sale)}]
         }
-    ]
-    // Recibe y envia coordenadas al topico de las coordenadas en otra particion, aun no se como hacer eso asi que lo envio ahi nomas
-      await producer.sendBatch({ topicMessages })
+      ]
+      await producer.sendBatch({topicMessages})
+      console.log("Envie", JSON.stringify(sale))
+
       await producer.disconnect();
       //await admin.disconnect();
       res.json(sale);

@@ -36,30 +36,32 @@ app.post("/ubication", (req, res) => {
       const producer = kafka.producer();
 
       await producer.connect();
-      const { id,coordenadas , denuncia } = req.body;
+      const { patente,ubicacion } = req.body;
+
       let ubication = {
-        id: id,
-        coordenadas: coordenadas,
-        denuncia: denuncia 
+        patente:patente,
+        ubicacion: ubicacion
       }
-      value = JSON.stringify(ubication)
-      if(ubication["denuncia"] == 1){
+
+      //value = JSON.stringify(ubication)
+      //if(ubication["denuncia"] == 1){
         console.log("Este carrito ha sido denunciado, es profugo")
 
-         const CarroProfugo = [{
+         const topicMessages = [{
             topic: 'ubication',
             partition:1,
-            messages:[{value:JSON.stringify(value),partition: 1}]
+            messages:[{value:JSON.stringify(ubication),partition: 1}]
           },
         ]
-        await producer.sendBatch({CarroProfugo})
+        await producer.sendBatch({topicMessages})
         console.log("Envie", JSON.stringify(ubication))
-      }
-      else{
+     // }
+      /*else{
         console.log("Carrito Limpio.")
 
-         const CarroProfugo = [
-         {topic: 'ubication',
+         const topicMessages = [
+         {
+          topic: 'ubication',
           partition:0,
           messages:[{value:JSON.stringify(ubication),partition: 0}]
          },
@@ -68,9 +70,9 @@ app.post("/ubication", (req, res) => {
           messages: [{value: JSON.stringify(ubication)}]
          }
        ]
-       await producer.sendBatch({CarroProfugo})
+       await producer.sendBatch({topicMessages})
        console.log("Envie", ubication)
-     }
+     }*/
      await producer.disconnect();
      res.json(ubication);
     })();
