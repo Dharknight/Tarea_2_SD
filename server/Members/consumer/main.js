@@ -34,18 +34,19 @@ const main = async () => {
   console.log("Entra main")
   await consumer.connect();
   await consumer.subscribe({ topic: "members", fromBeginning: true });
-
   await consumer.run({
     eachMessage: async ({ topic, partition, message }) => {
       //value = message.value
+      console.log(partition)
       if(partition == 1)
       {
       var miembro = JSON.parse(message.value.toString());
       console.log(miembro)
+      console.log("PARTICION:", partition)
       }
       else if(partition == 0)
       {
-        
+        console.log("PARTICION:", partition)
         var miembro = JSON.parse(message.value.toString());
         console.log(miembro)
       }

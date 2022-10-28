@@ -124,8 +124,8 @@ services:
     depends_on:
       - zookeeper
     environment:
-      KAFKA_ADVERTISED_HOST_NAME: "kafka"   
-      KAFKA_ADVERTISED_PORT: "9092"
+    #   KAFKA_ADVERTISED_HOST_NAME: "kafka"   
+    #   KAFKA_ADVERTISED_PORT: "9092"
       ALLOW_PLAINTEXT_LISTENER: "yes"
       KAFKA_CFG_ZOOKEEPER_CONNECT: "zookeeper:2181"
 
