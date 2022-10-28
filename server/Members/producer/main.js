@@ -55,7 +55,12 @@ app.post("/new_member", (req, res) => {
             topic: 'members',
             partition : 1,
             messages: [{value: JSON.stringify(member), partition: 1}]
-          },]
+          },
+          //{
+          //  topic:"members",
+          //  messages:[{value:JSON.stringify(member)}]
+          //}  
+        ]
           await producer.sendBatch({ topicMessages })
         }else{
           cpnopremium.push(value);
