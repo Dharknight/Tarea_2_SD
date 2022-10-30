@@ -38,7 +38,20 @@
   }
   
 ```
-
+<p>Para revisar la lista de miembros premium aceptados en el gremio se debe realizar la siguiente peticion get al servidor.</p>
+  
+```
+  http://localhost:8000/listmemberpre
+  
+```
+  
+<p>Para revisar la lista de miembros no premium aceptados en el gremio se debe realizar la siguiente peticion get al servidor.</p>
+  
+```
+  http://localhost:8000/listmembernopre
+  
+```
+  
 <p>Para realizar una peticion para el registro de una venta asociada a un carrito se debe ejecutar la sigueinte peticion POST.</p>
   
 ```
