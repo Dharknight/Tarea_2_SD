@@ -68,6 +68,13 @@
   }
   
 ```
+  
+<p>Para obtener las ventas totales, clientes totales y promedio de ventas a cada cliente por cada carrito se debe ejecutar la siguiente peticion GET.</p>
+  
+```
+  http://localhost:8001/ventadiaria
+  
+```
 
 
 <p>Para realizar una peticion para la posible denuncia de un carrito se debe ejecutar la sigueinte peticion POST.</p>
@@ -82,10 +89,3 @@
   }
   
 ```
-
-
-
-
-
-
-
