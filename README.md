@@ -1,12 +1,24 @@
-<em> # Tarea 2-SD </em>
+<em> Tarea 2-SD </em>
   <p align="left">
    <img src="https://img.shields.io/badge/STATUS-TERMINADO-blue">  <img src="https://img.shields.io/badge/LICENSE-FREE-green">
    </p>
    
 <h1 align='center'>Tarea 2 <h1>
-  <h3>## Integrantes: Abel Baulloza y Diego Carrillo .</h3>
+  <h3> Integrantes: Abel Baulloza y Diego Carrillo .</h3>
   <h3>**Instrucciones y uso**</h3>
 
+📁 Acceso al proyecto
+
+**Descargar el archivo desde el repositorio de github o hacer un clone mediante consola de comandos.**
+
+🛠️ Abre y ejecuta el proyecto
+**Antes de trabajar, es necesario estar dentro de la carpeta instalada.**
+**Luego de estar en el fichero se debe ejecutar el archivo docker-compose**
+
+```
+  $sudo docker-compose up --build
+```
+  
 
 
 Para realizar una peticion para el ingreso de un nuevo miembro al gremio se debe ejecutar la siguiente peticion POST.
