@@ -1,68 +1,38 @@
 # SD-Homeworks2
 ## Integrantes: Abel Baulloza y Diego Carrillo .
 **Instrucciones y uso**
-NO HAY PERROOOOOS
 
+Para realizar una peticion para el ingreso de un nuevo miembro al gremio se debe ejecutar la siguiente peticion POST.
+http://localhost:3000/new_member
 
-
-
-
-if(bloqueados.includes(json)) /*json["name"]*/
-      {
-        let word = json["username"]
-        //res.json(word+" bloqueado")
-        console.log("ta bloqueado sorry :(")
-        //return
-      }else{
-        if(!(json["username"] in registro)){
-          var array = []
-          registro[json["username"]] = array
-          registro[json["username"]].push(json["tiempo"])
-        }else{
-          registro[json["username"]].push(json["tiempo"])
-        }
-        //console.log(registro[json["username"]])
-        //console.log(registro[json["username"]].length)
-        if(registro[json["username"]].length >= 3 && registro[json["username"]][registro[json["username"]].length -1] - registro[json["username"]][registro[json["username"]].length -5] <60){
-          //console.log(registro[json["username"]][registro[json["username"]].length -1] - registro[json["username"]][registro[json["username"]].length -5])
-          console.log("Bloqueado")
-          bloqueados.push(json["username"])
-          console.log(bloqueados)
-        }
-      }
-
-
-
-
-
-Topic: Ventas
-http://localhost:3001/sales
-
+Agregando el sigueinte json en el body de la peticion.
 {
-	"client": "abel",
-  "count_sopaipillas": "3",
-	"hora": "14:45",
-	"stock": "5",
-	"ubicacion": "2,1",
-	"patente_carro": "CGZY30"
+  "name": "abel",
+  "lastname": "baulloza almeida",
+  "dni": "20.245.835-1",
+  "mail": "abel.baulloza@mail.udp.cl",
+  "patente": "CGZY30",
+  "premium": 0  ## 0 para posible miembro no premium y 1 para un posible miembro premium
 }
 
-Topic: Ubicacion
+Para realizar una peticion para el registro de una venta asociada a un carrito se debe ejecutar la sigueinte peticion POST.
+http://localhost:3001/sales
+
+Agregar el siguiente json en el body de la peticion
+{
+  "client": "abel",
+  "count_sopaipillas": 3,
+  "hora": "14:45",
+  "stock": 5,
+  "ubicacion": "2,1",
+  "patente_carro": "CGZY30"
+}
+
+Para realizar una peticion para la posible denuncia de un carrito se debe ejecutar la sigueinte peticion POST.
 http://localhost:3003/ubication
 
+Agregar el siguiente json en el body de al peticion
 {
   "patente":"CGZY30",
   "ubicacion": "1,1"
-}
-
-Topic: Miembros
-http://localhost:3000/new_member
-
-{
-	"name": "abel",
-  "lastname": "baulloza almeida",
-	"dni": "20.245.835-1",
-	"mail": "abel.baulloza@mail.udp.cl",
-	"patente": "CGZY30",
-	"premium":"si"
 }
