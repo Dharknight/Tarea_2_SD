@@ -51,7 +51,6 @@ const main = async () => {
         }
 
         console.log("Este carrito no fue denunciado")
-        //console.log(algo)
         if(carritos_patente_noprofugos.length == 0){
           carritos_patente_noprofugos.push(info)
         }
@@ -86,7 +85,6 @@ const main = async () => {
         }
 
         console.log("Este carrito fue denunciado, ES PROFUGO ATRAPENLOC CTMRE")
-          //console.log(algo)
           if(carritos_patente_profugos.length == 0){
             carritos_patente_profugos.push(info2)
           }
@@ -95,7 +93,6 @@ const main = async () => {
             if(carritos_patente_profugos[i].patente == info2.patente){
               console.log('Carrito denunciado ya está registrado')
               break;
-              //console.log(carritos_patente_profugos)
             }else if(carritos_patente_profugos.length == count){
               carritos_patente_profugos.push(info2)
               console.log('Carritos profugos')

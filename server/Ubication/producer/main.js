@@ -46,8 +46,6 @@ app.post("/ubication", (req, res) => {
         denuncia: denuncia,
         time: time
       }
-
-      //value = JSON.stringify(ubication)
       if(ubication["denuncia"] == 1){
         console.log("Este carrito ha sido denunciado, es profugo")
 
@@ -68,10 +66,6 @@ app.post("/ubication", (req, res) => {
           partition:0,
           messages:[{value:JSON.stringify(ubication),partition: 0}]
          },
-         //{
-         //  topic: "ubication",
-         //  messages: [{value: JSON.stringify(ubication)}]
-         //}
        ]
        await producer.sendBatch({topicMessages})
        console.log("Envie", ubication)

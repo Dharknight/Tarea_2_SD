@@ -9,7 +9,6 @@ const { Kafka } = require("kafkajs");
 //-------------------------------------------
 
 /* CONFIGS */
-//server.server();
 const app = express();
 dotenv.config();
 app.use(
@@ -33,7 +32,6 @@ app.post("/", (req, res) => {
   console.log("stock");
   (async () => {
       const producer = kafka.producer();
-      //const admin = kafka.admin();
       await producer.connect();
       const { client, count_sopaipillas, hora, stock, ubicacion } = req.body;
       var time = Math.floor(new Date() / 1000);
@@ -47,11 +45,9 @@ app.post("/", (req, res) => {
       }
       await producer.send({
         topic: "new_sale",
-        //value: JSON.stringify(user)
         messages: [{ value: JSON.stringify(user) }],
       })
       await producer.disconnect();
-      //await admin.disconnect();
       res.json(user);
   })();
 });

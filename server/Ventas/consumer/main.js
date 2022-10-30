@@ -28,31 +28,6 @@ var kafka = new Kafka({
 
 const consumer = kafka.consumer({ groupId: "group-sales" });
 
-
-//kafka
-/*var consumer = new Kafka.KafkaConsumer({
-'group.id': 'kafka',
-'metadata.broker.list': 'elkafka:9092',
-}, {});
-
-consumer.connect();
-consumer.on('ready', () => {
-    console.log('consumer ready..')
-    consumer.subscribe(['test']);
-    consumer.consume();
-  }).on('data', function(data) {
-    console.log(`received message: ${eventType.fromBuffer(data.value)}`);
-  });
-global.consumer = consumer;*/
-/* VARIABLES */
-
-//app.use(require('./api/find'))
-
-/*app.get('/', (req, res) => {
-  res.send('sale list')
-  main();
-})*/
-
 var value = null
 var json = {}
 var ventas_total_por_patente = []
@@ -100,26 +75,7 @@ const main = async () => {
             break;
           }
         }
-        //console.log(ventas_total_por_patente)
       }
-
-      /*if(clientes.length == 0){
-        var info3 = {
-          patente:json.patente_carro,
-          client:json.client,
-          count_sopaipillas:json.count_sopaipillas
-        }
-        promedio_ventas_a_cliente.push(info3)
-      }
-      for(var j in promedio_ventas_a_cliente){
-        if(promedio_ventas_a_cliente[i].patente == info3.patente && promedio_ventas_a_cliente[i].client == info3.client){
-
-        }else if(promedio_ventas_a_cliente[i].patente == info3.patente && promedio_ventas_a_cliente[i].client != info3.client){
-
-        }else if(promedio_ventas_a_cliente[i].patente != info3.patente && promedio_ventas_a_cliente[i].client == info3.client){
-
-        }
-      }*/
 
       //CLIENTES TOTALES POR CARRITO
       if(clientes_total_por_patente.length == 0){
@@ -147,7 +103,6 @@ const main = async () => {
             break;
           }
         }
-        //console.log(clientes_total_por_patente)
       }
 
       //PROMEDIO DE VENTAS DE CADA CARRITO POR CLIENTE
@@ -166,7 +121,6 @@ const main = async () => {
   .catch(console.error)
 };
 
-//asdlaskdj
 app.get('/ventadiaria', (req, res) => {
 
   console.log('Ventas totales por cada carrito')
@@ -183,11 +137,7 @@ app.get('/ventadiaria', (req, res) => {
   for(var a in clientes_total_por_patente){
     console.log(`Patente: ${clientes_total_por_patente[a].patente} , Clientes totales: ${clientes_total_por_patente[a].count_client}`)
   }
-  //console.log(clientes_total_por_patente)
-  //console.log(`Promedio de ventas a clientes: ${lasalkslas}`)
   res.send(ventas_total_por_patente)
-  //res.send(clientes_total_por_patente)
-  //res.send(snajskajs)
 })
 /* PORTS */
 

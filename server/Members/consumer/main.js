@@ -38,7 +38,6 @@ const main = async () => {
   await consumer.subscribe({ topic: "members", fromBeginning: true });
   await consumer.run({
     eachMessage: async ({ topic, partition, message }) => {
-      //value = message.value
       entra = Math.floor(Math.random()*7)
       console.log(entra)
       console.log(partition)
@@ -49,7 +48,6 @@ const main = async () => {
           console.log('Miembro premium validado')
           console.log(miembro)
           miembros_premium.push(miembro)
-          //console.log("PARTICION:", partition)
         }else{
           console.log('Miembro premium no validado')
           console.log(miembro)

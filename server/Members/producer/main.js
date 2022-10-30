@@ -22,7 +22,6 @@ app.use(cors());
 
 var port = process.env.PORT || 3000;
 var host = process.env.PORT || '0.0.0.0';
-///////////////////////////////////////////////////////////////
 var cpremium = [];
 var cpnopremium = [];
 var value = null;
@@ -51,30 +50,19 @@ app.post("/new_member", (req, res) => {
         cpremium.push(value);
         const topicMessages = [
           {
-            // Stock debe estar leyendo constantes consultas
             topic: 'members',
             partition : 1,
             messages: [{value: JSON.stringify(member), partition: 1}]
           },
-          //{
-          //  topic:"members",
-          //  messages:[{value:JSON.stringify(member)}]
-          //}  
         ]
           await producer.sendBatch({ topicMessages })
         }else{
           cpnopremium.push(value);
           const topicMessages = [
             {
-              // Stock debe estar leyendo constantes consultas
               topic: 'members',
               messages: [{value: JSON.stringify(member), partition: 0}]
             },
-            /*{
-                // Stock debe estar leyendo constantes consultas
-                topic: 'stock',
-                messages: [{value: JSON.stringify(member)}]
-            }*/
           ]
           await producer.sendBatch({ topicMessages })
         }
@@ -100,9 +88,6 @@ app.post("/new_member", (req, res) => {
       })();
   
   });
-  
-  /* PORTS */
-  
   app.listen(port,host, () => {
     console.log(`API run in: http://localhost:${port}.`);
   });

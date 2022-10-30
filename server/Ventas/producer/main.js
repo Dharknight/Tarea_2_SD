@@ -9,7 +9,6 @@ const { Kafka } = require("kafkajs");
 //-------------------------------------------
 
 /* CONFIGS */
-//server.server();
 const app = express();
 dotenv.config();
 app.use(
@@ -22,7 +21,6 @@ app.use(cors());
 
 var port = process.env.PORT || 3000;
 var host = process.env.PORT || '0.0.0.0';
-///////////////////////////////////////////////////////////////
 
 var kafka = new Kafka({
   clientId: "my-app",
@@ -33,7 +31,6 @@ app.post("/sales", (req, res) => {
   console.log("sales");
   (async () => {
       const producer = kafka.producer();
-      //const admin = kafka.admin();
       await producer.connect();
       const { client, count_sopaipillas, hora, stock, ubicacion, patente_carro } = req.body;
 
@@ -64,7 +61,6 @@ app.post("/sales", (req, res) => {
       console.log("Envie", JSON.stringify(sale))
 
       await producer.disconnect();
-      //await admin.disconnect();
       res.json(sale);
       console.log('Venta registrada')
   })();
