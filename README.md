@@ -1,6 +1,13 @@
-# SD-Homeworks2
-## Integrantes: Abel Baulloza y Diego Carrillo .
-**Instrucciones y uso**
+<em> # Tarea 2-SD </em>
+  <p align="left">
+   <img src="https://img.shields.io/badge/STATUS-TERMINADO-blue">  <img src="https://img.shields.io/badge/LICENSE-FREE-green">
+   </p>
+   
+<h1 align='center'>Tarea 2 <h1>
+  <h3>## Integrantes: Abel Baulloza y Diego Carrillo .</h3>
+  <h3>**Instrucciones y uso**</h3>
+
+
 
 Para realizar una peticion para el ingreso de un nuevo miembro al gremio se debe ejecutar la siguiente peticion POST.
 http://localhost:3000/new_member
