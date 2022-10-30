@@ -37,14 +37,18 @@ app.post("/ubication", (req, res) => {
 
       await producer.connect();
       const { patente,ubicacion } = req.body;
+      var denuncia = Math.floor(Math.random()*2)
+      var time = Math.floor(new Date() / 1000);
 
       let ubication = {
         patente:patente,
-        ubicacion: ubicacion
+        ubicacion: ubicacion,
+        denuncia: denuncia,
+        time: time
       }
 
       //value = JSON.stringify(ubication)
-      //if(ubication["denuncia"] == 1){
+      if(ubication["denuncia"] == 1){
         console.log("Este carrito ha sido denunciado, es profugo")
 
          const topicMessages = [{
@@ -55,8 +59,7 @@ app.post("/ubication", (req, res) => {
         ]
         await producer.sendBatch({topicMessages})
         console.log("Envie", JSON.stringify(ubication))
-     // }
-      /*else{
+      }else{
         console.log("Carrito Limpio.")
 
          const topicMessages = [
@@ -65,14 +68,14 @@ app.post("/ubication", (req, res) => {
           partition:0,
           messages:[{value:JSON.stringify(ubication),partition: 0}]
          },
-         {
-          topic: "ubication",
-          messages: [{value: JSON.stringify(ubication)}]
-         }
+         //{
+         //  topic: "ubication",
+         //  messages: [{value: JSON.stringify(ubication)}]
+         //}
        ]
        await producer.sendBatch({topicMessages})
        console.log("Envie", ubication)
-     }*/
+     }
      await producer.disconnect();
      res.json(ubication);
     })();

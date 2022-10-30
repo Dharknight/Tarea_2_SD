@@ -36,25 +36,19 @@ app.post("/sales", (req, res) => {
       //const admin = kafka.admin();
       await producer.connect();
       const { client, count_sopaipillas, hora, stock, ubicacion, patente_carro } = req.body;
-      var time = Math.floor(new Date() / 1000);
+
       let sale = {
         client: client,
         count_sopaipillas: count_sopaipillas,
         hora: hora,
         stock: stock,
         ubicacion: ubicacion,
-        patente_carro:patente_carro,
-        time:time
+        patente_carro:patente_carro
       }
       
       console.log("Este carrito ha sido denunciado, es profugo")
 
       const topicMessages = [
-        {
-          topic: 'ubication',
-          partition:0,
-          messages:[{value:JSON.stringify(sale),partition: 0}]
-        },
         {
           // Stock debe estar leyendo constantes consultas
           topic: 'sales',

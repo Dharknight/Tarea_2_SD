@@ -42,8 +42,10 @@ const main = async () => {
 
       if(partition == 0){
         var algo = JSON.parse(message.value.toString());
+        var count = 0;
+
         var info = {
-          patente:algo.patente_carro,
+          patente:algo.patente,
           ubicacion: algo.ubicacion,
           time: algo.time
         }
@@ -58,35 +60,43 @@ const main = async () => {
             if((info.time - carritos_patente_noprofugos[i].time) > 60){
               console.log(`Carrito con patente ${carritos_patente_noprofugos[i].patente} desaparecio`)
               carritos_patente_noprofugos.splice(i,1)
+              break;
             }else{
               carritos_patente_noprofugos[i].ubicacion = info.ubicacion
               console.log(`Carrito con patente ${carritos_patente_noprofugos[i].patente} esta en la ubicacion ${carritos_patente_noprofugos[i].ubicacion}`)
               carritos_patente_noprofugos[i].time = info.time 
+              break;
             }
           }else{
             carritos_patente_noprofugos.push(info)
             console.log(`Carrito con patente ${carritos_patente_noprofugos[i].patente} esta en la ubicacion ${carritos_patente_noprofugos[i].ubicacion}`)
+            break;
           }
         }
-        console.log('Carros profugos')
+        console.log('Carros no profugos')
         console.log(carritos_patente_noprofugos)
       }
       else if(partition == 1)
       {
         var algo = JSON.parse(message.value.toString());
+
         var info2 = {
           patente: algo.patente,
           ubicacion: algo.ubicacion
         }
+
         console.log("Este carrito fue denunciado, ES PROFUGO ATRAPENLOC CTMRE")
           //console.log(algo)
           if(carritos_patente_profugos.length == 0){
             carritos_patente_profugos.push(info2)
           }
           for(var i in carritos_patente_profugos){
+            count++
             if(carritos_patente_profugos[i].patente == info2.patente){
-              console.log(carritos_patente_profugos)
-            }else{
+              console.log('Carrito denunciado ya está registrado')
+              break;
+              //console.log(carritos_patente_profugos)
+            }else if(carritos_patente_profugos.length == count){
               carritos_patente_profugos.push(info2)
               console.log('Carritos profugos')
               console.log(carritos_patente_profugos)
