@@ -19,21 +19,31 @@
 ```
   $sudo docker-compose up --build
 ```
+
+<p>Ejecutado y levantados todos los servicios creados en el docker-compose se puede ya realizar las peticiones al servidor.</p>
   
+<p>Para realizar una peticion para el ingreso de un nuevo miembro al gremio se debe ejecutar la siguiente peticion POST.</p>
+  
+```
+  http://localhost:3000/new_member
+  
+  Agregando el sigueinte json en el body de la peticion.
+  {
+    "name": "abel",
+    "lastname": "baulloza almeida",
+    "dni": "20.245.835-1",
+    "mail": "abel.baulloza@mail.udp.cl",
+    "patente": "CGZY30",
+    "premium": 0  ## 0 para posible miembro no premium y 1 para un posible miembro premium
+  }
+  
+```
 
 
 Para realizar una peticion para el ingreso de un nuevo miembro al gremio se debe ejecutar la siguiente peticion POST.
-http://localhost:3000/new_member
 
-Agregando el sigueinte json en el body de la peticion.
-{
-  "name": "abel",
-  "lastname": "baulloza almeida",
-  "dni": "20.245.835-1",
-  "mail": "abel.baulloza@mail.udp.cl",
-  "patente": "CGZY30",
-  "premium": 0  ## 0 para posible miembro no premium y 1 para un posible miembro premium
-}
+
+
 
 Para realizar una peticion para el registro de una venta asociada a un carrito se debe ejecutar la sigueinte peticion POST.
 http://localhost:3001/sales
