@@ -11,7 +11,8 @@
 
 **Descargar el archivo desde el repositorio de github o hacer un clone mediante consola de comandos.**
 
-🛠️ Abre y ejecuta el proyecto
+🛠️ Abre y ejecuta el proyecto.
+  
 **Antes de trabajar, es necesario estar dentro de la carpeta instalada.**
 **Luego de estar en el fichero se debe ejecutar el archivo docker-compose**
 
